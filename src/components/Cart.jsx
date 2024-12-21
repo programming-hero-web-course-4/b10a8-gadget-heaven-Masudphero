@@ -5,7 +5,50 @@ import toast from 'react-hot-toast';
 
 function Cart({ cartProducts, cartArr, setCartArr }) {
 
-  
+    const navigate = useNavigate();
+    const dialoagRef = useRef();
+    let purchasedPrice = useRef(0);
+
+    const handlePurchase = () => {
+        
+        dialoagRef.current.showModal();
+        purchasedPrice.current = cartArr.total_price;
+        cartArr.ids = [];
+        cartArr.total_price = 0;
+        setCartArr({...cartArr})
+    }
+    const handleClose = () => {
+        
+        setCartArr({...cartArr})
+        dialoagRef.current.close()
+        navigate('/');
+    };
+
+    const sortDescending = () => {
+        let sorted = cartProducts.sort((a, b) => b.price - a.price);
+        let copy = sorted.map(
+            (item) => item.product_id
+        )
+        cartArr.ids = copy;
+        setCartArr({...cartArr})
+    }
+
+    const handleDelete = (id, price) => {
+
+        let arr = cartProducts.map(
+            prod => {
+                if (prod.product_id !== id) {
+                    return prod.product_id
+                } else { id = '' }
+            }
+        )
+
+        cartArr.ids = arr.filter( element => element !== undefined);
+        cartArr.total_price -= price
+
+        toast.success('successfully deleted from cart');
+        setCartArr({...cartArr});
+    }
 
 return (
     <>
