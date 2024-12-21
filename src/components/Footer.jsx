@@ -29,7 +29,14 @@ function Footer () {
                             </ul>
                         </div>
                         
-                        
+                        <div>
+                            <h3 className="font-bold mb-2">Legal</h3>
+                            <ul className=" text-gray-600 text-sm space-y-2">
+                                <li>Terms of Service</li>
+                                <li>Privacy Policy</li>
+                                <li>Cookie Policy</li>
+                            </ul>
+                        </div>
 
                     </div>
                 </section>
